@@ -1,9 +1,65 @@
 db = db.getSiblingDB('videoStore');
 
-db.movies.aggregate([{$count: "darab"}])
-// print($darab)
+/* 
+Készíts egy scriptet egy javaScript fájlban! A script feladata, hogy egyetlen függvényben lekérdezze a mozifilmek számát kimentve egy változóba, 
+majd ennek segítségével egy ciklus keretében 3-asával lapozva írja ki a konzolra a filmek címeit és kategóriáit (kisbetűvel a kategóriát) 
+a következő módon =>
+pl.: „Terminator : action movie”
+Minden egyes oldal alján jelenjen meg a szöveg: --page over--!
+Segítségül egy lehetséges eredmény:
+*/
+
+//https://www.mongodb.com/docs/manual/reference/method/cursor.skip/
+
+
+//db.movies.find().size()
 
 /* (function () {
+  let count = db.movies.count();
+  let reziduum = count;
+  let movies = db.movies.find({}, { title: 1, category: 1, _id: 0 }).toArray()
+
+  while (reziduum > 3) {
+    for (let i = 0; i < 3; i = i + 1) {
+      printjson(movies[reziduum - i])
+    }
+    reziduum = reziduum - 3;
+    printjson("-- page over --")
+    if (reziduum <= 3) {
+      for (let i = 0; i < 3; i = i + 1) {
+        printjson(movies[reziduum - i])
+      }
+    }
+  }
+})()
+ */
+
+  (function () {
+    let count = db.movies.count();
+    let reziduum = count;
+
+    while (reziduum > 3) {
+      printjson(db.movies.find({}, { title: 1, category: 1, _id: 0 }).skip(count - reziduum).limit(3).toArray())
+      reziduum = reziduum - 3;
+      print("-- page over --")
+      if (reziduum <= 3) {
+        printjson(db.movies.find({}, { title: 1, category: 1, _id: 0 }).skip(count - reziduum).limit(3).toArray())
+      }
+    }
+  })()
+
+
+  
+// printjson((db.movies.find({}, {title: 1, category: 1, _id: 0}).toArray()))
+// printjson((db.movies.aggregate([{$project: {category1: {$toLower: "$category"}, title: 1}}]).toArray()))
+
+//db.movies.find({}, {title: 1, category: 1, _id: 0})
+
+
+/*
+db.movies.aggregate([{$count: "darab"}])
+print($darab)
+ (function () {
   cursor = db.movies.aggregate([{$count: "darab"}])
 print($darab)
   while (cursor.hasNext()) {
