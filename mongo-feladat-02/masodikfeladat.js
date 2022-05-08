@@ -14,6 +14,7 @@ db.createCollection("directors", {
   }
 });
 
+// 2.feladat:	Ments el benne 3 „rendező” dokumentumot az insertOne() parancs segítségével:
 db.directors.insertOne({ _id: NumberInt(1), name: "Steven Spielberg", birthYear: NumberInt(1951), movies: [] });
 db.directors.insertOne({ _id: NumberInt(2), name: "Clint Eastwood", birthYear: NumberInt(1952), movies: [] });
 db.directors.insertOne({ _id: NumberInt(3), name: "James Cameron", birthYear: NumberInt(1953), movies: [] });

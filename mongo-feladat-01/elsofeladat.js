@@ -5,6 +5,8 @@ db = db.getSiblingDB('videoStore')
 // https://www.mongodb.com/docs/manual/tutorial/write-scripts-for-the-mongo-shell/#scripting
 // https://stackoverflow.com/questions/71826660/mongo-shell-command-not-accept-use-db-command
 
+// https://www.mongodb.com/docs/manual/core/schema-validation/
+// https://www.digitalocean.com/community/tutorials/how-to-use-schema-validation-in-mongodb
 db.createCollection("movies", {
   validator: {
     $jsonSchema: {
@@ -85,9 +87,10 @@ db.runCommand({
 
 db.movies.updateMany({}, { $set: { ratings: [] } });
 
-db.movies.updateOne({ title: "Dave Chappelle: For What it's Worth" }, { $push: { ratings: NumberInt(3) } });
-db.movies.updateOne({ title: "Killers" }, { $push: { ratings: NumberInt(4) } });
-db.movies.updateOne({ title: "Anatomy (Anatomie)" }, { $push: { ratings: NumberInt(5) } });
+// db.movies.updateOne({ title: "Anatomy (Anatomie)" }, { $push: { ratings: NumberInt(5) } }); // alap eset. Alább: több tömbelemmel bővítés:
+db.movies.updateOne({ title: "Dave Chappelle: For What it's Worth" }, { $push: { ratings: {$each: [NumberInt(1), NumberInt(2), NumberInt(3)]}} } );
+db.movies.updateOne({ title: "Killers" }, { $push: { ratings: {$each: [NumberInt(2), NumberInt(3), NumberInt(4)]}} });
+db.movies.updateOne({ title: "Anatomy (Anatomie)" }, { $push: { ratings: {$each: [NumberInt(3), NumberInt(4), NumberInt(5)]}} });
 
 db.movies.updateMany({}, { $set: { releaseYear: 2000 } });
 

@@ -35,14 +35,8 @@ db.movies.find({}, { title: 1, releaseYear: 1, _id: 0 }).sort({ releaseYear: 1 }
 db.movies.find({category: "ROMANTIC"}, { title: 1, releaseYear: 1, _id: 0 }).sort({releaseYear: -1}).skip(1).limit(1)
 
 
-
-
-
-
-
-
-
-var cursor = db.movies.find({}, { title: 1, releaseYear: 1, _id: 0 }).sort({ releaseYear: 1 }).toArray()
+// Kiegészítő piszkozatok:
+/* var cursor = db.movies.find({}, { title: 1, releaseYear: 1, _id: 0 }).sort({ releaseYear: 1 }).toArray()
 cursor.forEach(movie => {if })
 
 
@@ -56,4 +50,4 @@ for (let i = 0; i < 5; i++) {
 db.movies.aggregate([{ $match: {} }, { $sort: { title: -1 } }])
 
 
-use videoSore
+use videoSore */

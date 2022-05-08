@@ -8,8 +8,13 @@ pl.: „Terminator : action movie”
 Minden egyes oldal alján jelenjen meg a szöveg: --page over--!
 Segítségül egy lehetséges eredmény:
 */
-//elvi lehetőség még:
-//https://www.mongodb.com/docs/manual/reference/method/cursor.skip/
+// Elvi lehetőség még:
+// https://www.mongodb.com/docs/manual/reference/method/cursor.skip/
+// https://www.mongodb.com/docs/manual/tutorial/iterate-a-cursor/
+
+// https://www.mongodb.com/docs/manual/reference/method/#std-label-js-query-cursor-methods
+
+
 
   (function () {
 
