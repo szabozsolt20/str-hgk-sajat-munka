@@ -8,10 +8,23 @@ pl.: „Terminator : action movie”
 Minden egyes oldal alján jelenjen meg a szöveg: --page over--!
 Segítségül egy lehetséges eredmény:
 */
-
+//elvi lehetőség még:
 //https://www.mongodb.com/docs/manual/reference/method/cursor.skip/
 
+  (function () {
 
+     db.movies.find({}, { title: 1, category: 1, _id: 0 }).toArray().forEach((element, i) => {
+      print(`${element.title}: ${element.category.toLowerCase()}`); 
+     // printjson(element.title +": " + element.category.toLowerCase()); // is működik
+     if (i % 3 == 2) {print("-- page over --")};
+
+        });
+
+  })()
+
+
+
+//todo //////////// Alternatív próbák: //////////////////  
 //db.movies.find().size()
 
 /* (function () {
@@ -34,9 +47,11 @@ Segítségül egy lehetséges eredmény:
 })()
  */
 
-  (function () {
+/*   (function () {
     let count = db.movies.count();
     let reziduum = count;
+
+
 
     while (reziduum > 3) {
       printjson(db.movies.find({}, { title: 1, category: 1, _id: 0 }).skip(count - reziduum).limit(3).toArray())
@@ -47,7 +62,7 @@ Segítségül egy lehetséges eredmény:
       }
     }
   })()
-
+ */
 
   
 // printjson((db.movies.find({}, {title: 1, category: 1, _id: 0}).toArray()))
